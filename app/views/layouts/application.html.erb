@@ -9,6 +9,15 @@
   </head>
 
   <body>
+    <nav class="container">
+      <% if user_signed_in? %>
+        <%= link_to 'Edit account', edit_user_registration_path, class: 'btn' %>
+        <%= link_to 'Sign out', destroy_user_session_path, class: 'btn', method: :delete %>
+      <% else %>
+        <%= link_to 'Sign in', new_user_session_path, class: 'btn' %>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'btn' %>
+      <% end %>
+    </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
