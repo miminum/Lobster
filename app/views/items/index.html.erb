@@ -1,0 +1,32 @@
+<h1>My Food Items</h1>
+<p>Find me in app/views/items/index.html.erb</p>
+
+<table class="">
+  <tbody>
+    <% @items.each do |item| %>
+        <tr>
+          <td>
+            <details>
+              <summary><%= item.name %></summary>
+                <table>
+                  <tr><%= item.description %></tr>
+                  <tr>
+                    <td>
+                      <% if item.image_data %>  
+                        <%= image_tag item.image_url(:thumb) %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= "Price: $#{item.price}" %>
+                    </td>
+                  <tr>
+                </table>
+            </details>
+          </td>
+          <td><%= link_to 'Edit', edit_item_path(item) %></td>
+          <td><%= link_to 'Destroy', items_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Item', new_item_path %>
