@@ -38,8 +38,22 @@
       Remove attachment: <%= form.check_box :remove_user_photo %>
   </div>
 
-  
+  <div class="field">
+    <%= form.label :cuisine_type %><br>
+    <%= form.select :cuisine_type, SellerProfile::CUISINE_TYPES %>
+  </div>
 
+  <div class="field">
+    <%= form.label 'Delivery Distance (km)' %>
+    <small><%= form.label 'Leave blank if not offered' %></small><br>
+    <%= form.select :delvery_distance, options_for_select(0..10) %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Delivery Cost ($)' %><br>
+    <%= form.text_field :delivery_cost, id: :seller_profile_delivery_cost %>
+  </div>
+  
   <div class="actions">
     <%= form.submit %>
   </div>
