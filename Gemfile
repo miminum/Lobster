@@ -37,6 +37,7 @@ gem 'fastimage'
 gem 'image_processing'
 gem 'mini_magick'
 gem 'shrine'
+gem 'aws-sdk', '~> 3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

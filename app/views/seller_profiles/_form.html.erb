@@ -1,0 +1,46 @@
+<%= form_with(model: seller_profile, local: true) do |form| %>
+  <% if seller_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(seller_profile.errors.count, "error") %> prohibited this Seller Profile from being saved:</h2>
+
+      <ul>
+      <% seller_profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   
+  <div class="field">
+    <%= form.label 'Shop Name' %>
+    <%= form.text_field :shop_name, id: :seller_profile_shop_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shop_description %>
+    <%= form.text_area :shop_description, id: :seller_profile_shop_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shop_photo %><br>
+    <%= form.file_field :shop_photo, id: :seller_profile_shop_photo %>
+  </div>
+  <div class="field">
+      Remove attachment: <%= form.check_box :remove_shop_photo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_photo %><br>
+    <%= form.file_field :user_photo, id: :seller_profile_user_photo %>
+  </div>
+  <div class="field">
+      Remove attachment: <%= form.check_box :remove_user_photo %>
+  </div>
+
+  
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
