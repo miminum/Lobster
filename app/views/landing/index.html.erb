@@ -1,2 +1,7 @@
 <h1>Landing#index</h1>
+
+<% @todays_listings.each do |listing| %>
+  <%= listing.seller_profile.shop_name  %>
+<% end %>
+
 <p>Find me in app/views/landing/index.html.erb</p>

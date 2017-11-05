@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171104091615) do
+ActiveRecord::Schema.define(version: 20171104133645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 20171104091615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["seller_profile_id"], name: "index_items_on_seller_profile_id"
+  end
+
+  create_table "listings", force: :cascade do |t|
+    t.date "date"
+    t.time "open"
+    t.time "close"
+    t.bigint "item_id"
+    t.integer "quantity"
+    t.bigint "seller_profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_listings_on_item_id"
+    t.index ["seller_profile_id"], name: "index_listings_on_seller_profile_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -76,6 +89,8 @@ ActiveRecord::Schema.define(version: 20171104091615) do
   end
 
   add_foreign_key "items", "seller_profiles"
+  add_foreign_key "listings", "items"
+  add_foreign_key "listings", "seller_profiles"
   add_foreign_key "profiles", "users"
   add_foreign_key "seller_profiles", "users"
 end

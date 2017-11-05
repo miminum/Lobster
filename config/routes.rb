@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :listings
  root 'landing#index', as: 'home'
  
   # Routes for profile
