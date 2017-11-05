@@ -32,6 +32,11 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'geocoder'
 gem 'httparty'
+# Bootstrap gem and dependencies
+gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'jquery-rails'
+# Font Awesome
+gem "font-awesome-rails"
 # Shrine Dependencies
 gem 'fastimage'
 gem 'image_processing'

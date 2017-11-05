@@ -1,0 +1,79 @@
+@import "bootstrap";
+@import "dashboard";
+@import "font-awesome";
+
+$primary-blue: #1B998B; 
+$primary-red: #AC3931;
+$primary-grey: #DEE5E5;
+$white: #FDFDFF;
+$black: #181010;
+
+$font-body: 'Lato', sans-serif;
+$font-heading: 'Cantata One', serif;
+
+.heading-font {
+    font-family: $font-heading;
+}
+.body-font {
+    font-family: $font-body;
+}
+.bg-grey {
+    background-color: $primary-grey;
+}
+.bg-white {
+    background-color: $white;
+}
+.bg-blue {
+    background-color: $primary-blue;
+}
+.txt-white {
+    color: $white;
+}
+.txt-black {
+    color: $black;
+}
+.fill { 
+    min-height: 100vh;
+    height: 100vh;
+}
+.navbar-title {
+    font-family: 'Lobster', cursive;
+    font-size: 28px;
+    color: $black;
+}
+
+    /* the rest of your styling */
+
+.navbar-title:hover {
+    color: $primary-blue;
+}
+.btn-primary {
+    color: $white;
+    background-color: $primary-blue;
+    border-color: $primary-blue;
+  }
+  
+.btn-primary:hover {
+    color: $white;
+    background-color: $primary-blue;
+    border-color: $black;
+  }
+
+.btn-secondary {
+    color: $primary-blue;
+    background-color: $primary-grey;
+    border-color: $primary-blue;
+  }
+  
+ .btn-secondary:hover {
+    color: $white;
+    background-color: $primary-blue;
+    border-color: $primary-blue;
+  }
+  
+  
+  
+  
+  
+  
+  

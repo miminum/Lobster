@@ -3,23 +3,35 @@
   <head>
     <title>Lobster</title>
     <%= csrf_meta_tags %>
-
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Cantata+One|Lato:400,400i|Lobster" rel="stylesheet">
   </head>
 
   <body>
-    <nav class="container">
-      <% if user_signed_in? %>
-        <%= link_to 'Edit account', edit_user_registration_path, class: 'btn' %>
-        <%= link_to 'Sign out', destroy_user_session_path, class: 'btn', method: :delete %>
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_path, class: 'btn' %>
-        <%= link_to 'Sign up', new_user_registration_path, class: 'btn' %>
-      <% end %>
-    </nav>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="container px-0 pb-0">
+      <nav class="container-fluid bg-grey pb-0 navbar-shadow">
+        <a class="navbar-brand navbar-title" href="/">Lobster</a>
+        <% if user_signed_in? %>
+          <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-secondary float-right mr-1 mt-2', method: :delete %>
+          <%= link_to dashboard_path, class: "btn float-right ml-1 mr-3 navbar-title" do %>
+            <%= fa_icon "user" %>
+          <% end %>
+          <%= link_to dashboard_path, class: "btn float-right mx-1 navbar-title" do %>
+            <%= fa_icon "envelope" %>
+          <% end %>
+          <%= link_to dashboard_path, class: "btn float-right mx-1 navbar-title" do %>
+            <%= fa_icon "shopping-cart" %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-secondary float-right mx-1 mt-2' %>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary float-right mx-1 mt-2' %>
+        <% end %>
+      </nav>
+      <%= yield %>
+      <span class="notice"><%= notice %></span>
+      <span class="alert"><%= alert %></span>
+    </div>
   </body>
 </html>
