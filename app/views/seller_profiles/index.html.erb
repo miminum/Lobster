@@ -1,0 +1,43 @@
+<div class="container bg-blue text-center">
+  <h1 class="heading-font txt-white py-4"> My Seller Profile</h1>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="container bg-grey text-center">
+      <h4 class="heading-font txt-black py-4">My Items</h4>
+    </div>
+    <div class="bg-white">
+      <% index = 1 %>
+      <% @items.each do |item| %>
+        <% if index % 2 == 0 %>
+          <div class="bg-grey py-3">
+            <span><%= item.name %></span>
+            <%= link_to "edit", edit_item_path(item), class: "float-right" %>
+          </div>
+        <% else %>
+          <div class="bg-white py-3">
+            <span><%= item.name %></span>
+            <%= link_to "edit", edit_item_path(item), class: "float-right" %><br>
+          </div>
+        <% end %>
+        <% index +=  1 %>
+      <% end %>
+    </div>
+    <div class="container bg-white text-center p-3">
+      <%= link_to "Add New Item", new_item_path, class: "btn btn-primary" %> 
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="container bg-grey text-center">
+      <h4 class="heading-font txt-black py-4">Shop Details</h4>
+    </div>
+    <div>
+      <strong>Shop: </strong><%= @shop.shop_name %>
+    </div>
+    <div>
+      <strong>Description: </strong><%= @shop.shop_description %>
+    </div>
+
+</div>

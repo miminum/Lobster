@@ -1,11 +1,7 @@
-class SellerProfilesController < ApplicationController
+class ShopsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_shop 
+  before_action :set_shop, only: [:show, :edit, :update]
   
-  def index
-    @items = Item.where(shop: @shop)
-  end
-
   def show
   end
 
@@ -35,10 +31,10 @@ class SellerProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        format.html { redirect_to seller_profile_path, notice: 'Congratulations, you are now a certified chef!' }
+        format.html { redirect_to @shop, notice: 'Congratulations, you are now a certified chef!' }
         format.json { render :show, status: :ok, location: shop_path }
       else
-        format.html { redirect_to edit_seller_profile }
+        format.html { render :edit }
         format.json { render json: @shop.errors, status: :unprocessable_entity }
       end
     end
@@ -46,13 +42,10 @@ class SellerProfilesController < ApplicationController
   private
 
   def set_shop
-    @shop = current_user.shop
-    
+    @shop = Shop.find(params[:id])
   end
 
   def shop_params
     params.require(:shop).permit(:shop_name, :shop_description, :shop_photo, :user_photo, :cuisine_type, :delivery_km, :delivery_cost,:shop_photo_data, :user_photo_data, :remove_shop_photo, :remove_user_photo)
   end
-  
-
 end

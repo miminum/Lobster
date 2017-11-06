@@ -1,0 +1,19 @@
+<h1></h1>
+
+
+<h2><%= @shop.shop_name %></h2>
+<p><%= @shop.shop_description %></p>
+
+<% if @shop.shop_photo_data %>
+  <%= image_tag @shop.shop_photo_url(:thumb) %>
+<% end %>
+<% if @shop.user_photo_data %>
+  <%= image_tag @shop.user_photo_url(:thumb) %>
+<% end %>
+
+<% shop.items.each do |item| %>
+
+<% end %>
+
+
+

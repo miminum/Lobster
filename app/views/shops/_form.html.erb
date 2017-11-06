@@ -1,0 +1,62 @@
+<%= form_with(model: shop, local: true) do |form| %>
+  <% if shop.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shop.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% shop.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   
+  <div class="field">
+    <%= form.label 'Shop Name' %>
+    <%= form.text_field :shop_name, id: :shop_shop_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Last Name' %>
+    <%= form.text_area :shop_description, id: :shop_shop_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shop_photo %><br>
+    <%= form.file_field :shop_photo, id: :shop_shop_photo %>
+  </div>
+  <div class="field">
+      Remove attachment: <%= form.check_box :remove_image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_photo %><br>
+    <%= form.file_field :user_photo, id: :shop_user_photo %>
+  </div>
+  <div class="field">
+      Remove attachment: <%= form.check_box :remove_image %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :cuisine_type %>
+    <%= form.select :cuisine_type, Shop::CUISINE_TYPES %>
+  </div>
+
+  <div>
+    Please Ignore if Delivery is not offered
+  </div>
+
+  <div class="field">
+    <%= form.label "Maximum Milage for Delivery (km)" %>
+    <%= form.text_field :delivery_km, id: :shop_delivery_km %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivery_cost %>
+    <%= form.text_field :delivery_cost, id: :shop_delivery_cost %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

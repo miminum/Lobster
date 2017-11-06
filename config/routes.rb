@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  
-  resources :shops, only: [:index, :show] 
-
   devise_for :users
 
   # Landing Page
@@ -19,15 +16,10 @@ Rails.application.routes.draw do
   # resources :profiles, only: [:new, :edit, :create, :update]
   
   # Routes for seller profile
-  get '/sellerprofile', to: 'seller_profiles#show', as: 'seller_profile'
-  post '/sellerprofiles', to: 'seller_profiles#create', as: 'seller_profiles'
-  get '/sellerprofile/new', to: 'seller_profiles#new', as: 'new_seller_profile'
-  get '/sellerprofile/edit', to: 'seller_profiles#edit', as: 'edit_seller_profile'
-  patch '/sellerprofile', to: 'seller_profiles#update'
-  put '/sellerprofile', to: 'seller_profiles#update'
-
+  get '/sellerprofile', to: 'seller_profiles#index', as: 'seller_profile'
   
-  
+  # Routes for shop
+  resources :shops, only: [:show, :new, :update, :edit, :destroy]   
   # Routes for items
   resources :items
 
