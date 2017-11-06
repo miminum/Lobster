@@ -45,6 +45,13 @@
     <% end %>
   <% end %>
 
+  <div>
+    <%= form.check_box :paid %>
+    <span> Delivery to:</span>
+    <div>
+      <%= current_user.profile.full_address %>
+    </div>
+  </div>
   <div class="actions">
     <%= form.submit "Order"%>
   </div>

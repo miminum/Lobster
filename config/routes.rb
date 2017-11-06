@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'order_items/create'
+  post 'order_items/create', to:'order_items#create', as: 'order_items'
 
   resources :orders
   devise_for :users
