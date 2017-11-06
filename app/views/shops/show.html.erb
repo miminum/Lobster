@@ -11,9 +11,31 @@
   <%= image_tag @shop.user_photo_url(:thumb) %>
 <% end %>
 
-<% shop.items.each do |item| %>
-  
-<% end %>
 
-
-
+<table>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <details>
+            <summary><%= item.name %></summary>
+              <table>
+                <tr><%= item.description %></tr>
+                <tr>
+                  <td>
+                    <% if item.image_data %>  
+                      <%= image_tag item.image_url(:thumb) %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= "Price: $#{item.price}" %>
+                  </td>
+                <tr>
+              </table>
+          </details>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ 

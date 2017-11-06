@@ -13,12 +13,14 @@
         <% if index % 2 == 0 %>
           <div class="bg-grey py-3">
             <span><%= item.name %></span>
-            <%= link_to "edit", edit_item_path(item), class: "float-right" %>
+            <%= link_to "Edit", edit_item_path(item), class: "float-right" %> 
+            <%= link_to 'Destroy', items_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "float-right" %>
           </div>
         <% else %>
           <div class="bg-white py-3">
             <span><%= item.name %></span>
-            <%= link_to "edit", edit_item_path(item), class: "float-right" %><br>
+            <%= link_to "Edit", edit_item_path(item), class: "float-right" %> 
+            <%= link_to 'Destroy', items_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "float-right" %>
           </div>
         <% end %>
         <% index +=  1 %>

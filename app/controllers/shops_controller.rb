@@ -3,6 +3,7 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update]
   
   def show
+    @items = Item.where(shop: @shop)
   end
 
   def new
