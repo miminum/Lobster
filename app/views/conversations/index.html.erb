@@ -1,0 +1,17 @@
+<div class="container bg-blue text-center">
+  <h1 class="heading-font txt-white py-4">My Inbox</h1>
+</div>
+  <div class="item">
+    <% @conversations.each do |conversation| %>
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+        <% if conversation.sender_id == current_user.id %>
+          <% recipient = User.find(conversation.recipient_id) %>
+        <% else %>
+          <% recipient = User.find(conversation.sender_id) %>
+        <% end %>
+        <div>
+          <%= link_to recipient.profile.first_name, conversation_messages_path(conversation)%>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
