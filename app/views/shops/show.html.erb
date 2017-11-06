@@ -12,30 +12,36 @@
 <% end %>
 
 
-<table>
-  <tbody>
+
+  
+<%= form_with(model: @order, local: true) do |form| %>
+  <%= form.fields_for :items do |items_form| %>
     <% @items.each do |item| %>
-      <tr>
-        <td>
-          <details>
-            <summary><%= item.name %></summary>
-              <table>
-                <tr><%= item.description %></tr>
-                <tr>
-                  <td>
-                    <% if item.image_data %>  
-                      <%= image_tag item.image_url(:thumb) %>
-                    <% end %>
-                  </td>
-                  <td>
-                    <%= "Price: $#{item.price}" %>
-                  </td>
-                <tr>
-              </table>
-          </details>
-        </td>
-      </tr>
+      <details>
+        <summary>
+          <%= item.name %>
+            <%= items_form.fields_for "#{item.id}" do |item_form| %>
+              <%= form.label item.name %>
+              <%= item_form.text_field :quantity %>
+            <% end %>
+        </summary>
+          <table>
+            <tr><%= item.description %></tr>
+            <tr>
+              <td>
+                <% if item.image_data %>  
+                  <%= image_tag item.image_url(:thumb) %>
+                <% end %>
+              </td>
+              <td>
+                <%= "Price: $#{item.price}" %>
+              </td>
+            </tr>
+          </table>
+      </details>
     <% end %>
-  </tbody>
-</table>
- 
+  <% end %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
