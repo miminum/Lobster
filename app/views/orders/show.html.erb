@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Buyer:</strong>
+  <%= @order.buyer %>
+</p>
+
+<p>
+  <strong>Shop:</strong>
+  <%= @order.shop %>
+</p>
+
+<p>
+  <strong>Delivery:</strong>
+  <%= @order.delivery %>
+</p>
+
+<p>
+  <strong>Total price:</strong>
+  <%= @order.total_price %>
+</p>
+
+<p>
+  <strong>Charge identifier:</strong>
+  <%= @order.charge_identifier %>
+</p>
+
+<p>
+  <strong>Payment success:</strong>
+  <%= @order.payment_success %>
+</p>
+
+<p>
+  <strong>Mark as done:</strong>
+  <%= @order.mark_as_done %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

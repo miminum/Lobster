@@ -4,6 +4,8 @@ class ShopsController < ApplicationController
   
   def show
     @items = Item.where(shop: @shop)
+    @order = Order.new
+    @order_item = OrderItem.new
   end
 
   def new
@@ -48,5 +50,9 @@ class ShopsController < ApplicationController
 
   def shop_params
     params.require(:shop).permit(:shop_name, :shop_description, :shop_photo, :user_photo, :cuisine_type, :delivery_km, :delivery_cost,:shop_photo_data, :user_photo_data, :remove_shop_photo, :remove_user_photo)
+  end
+
+  def order_params
+    params.require(:order).permit(:buyer_id, :shop_id, :delivery, :total_price, :charge_identifier, :payment_success)
   end
 end

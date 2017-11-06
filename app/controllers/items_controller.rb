@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @items = Item.where(seller_profile: current_user.seller_profile)
+    @items = Item.where(shop: current_user.shop)
   end
 
   def new
@@ -15,7 +15,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    @item.seller_profile = current_user.seller_profile
+    @item.shop = current_user.shop
     if @item.save
       redirect_to items_url, notice: 'Item was successfully created.'
     else

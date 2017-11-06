@@ -15,7 +15,10 @@
 
   
 <%= form_with(model: @order, local: true) do |form| %>
-  <%= form.fields_for :items do |items_form| %>
+  <%= form.hidden_field :buyer_id, :value => current_user.id %>
+  <%= form.hidden_field :shop_id, :value => @shop.id %>
+  
+  <%= form.fields_for :order_items do |items_form| %>
     <% @items.each do |item| %>
       <details>
         <summary>
@@ -41,7 +44,8 @@
       </details>
     <% end %>
   <% end %>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Order"%>
   </div>
 <% end %>

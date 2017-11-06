@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171106011943) do
+ActiveRecord::Schema.define(version: 20171106051105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,29 @@ ActiveRecord::Schema.define(version: 20171106011943) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "item_id"
+    t.integer "quantity"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_items_on_item_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "buyer_id"
+    t.bigint "shop_id"
+    t.boolean "delivery"
+    t.float "total_price"
+    t.string "charge_identifier"
+    t.boolean "payment_success", default: false
+    t.boolean "mark_as_done", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_orders_on_shop_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -111,6 +134,9 @@ ActiveRecord::Schema.define(version: 20171106011943) do
   add_foreign_key "listings", "shops", column: "seller_profile_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users"
+  add_foreign_key "order_items", "items"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "shops"
   add_foreign_key "profiles", "users"
   add_foreign_key "shops", "users"
 end

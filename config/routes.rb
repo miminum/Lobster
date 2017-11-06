@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   devise_for :users
 
   # Landing Page
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
   resources :shops, only: [:show, :new, :update, :edit, :destroy]   
   # Routes for items
   resources :items
-
+  
   # Routes for conversations
   resources :conversations do
     resources :messages
