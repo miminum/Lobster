@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   post 'order_items/create', to:'order_items#create', as: 'order_items'
-
-  resources :orders
+  # Orders
+  resources :orders do
+    resources :charges, only: [:new, :create]
+  end
   devise_for :users
 
   # Landing Page
