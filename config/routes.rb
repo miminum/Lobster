@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  get 'shop/index'
+  resources :shops, only: [:index, :show] 
 
   devise_for :users
 
