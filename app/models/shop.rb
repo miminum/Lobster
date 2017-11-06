@@ -1,4 +1,4 @@
-class SellerProfile < ApplicationRecord
+class Shop < ApplicationRecord
   include ShopPhotoUploader[:shop_photo]
   include UserPhotoUploader[:user_photo]
   belongs_to :user
