@@ -3,4 +3,4 @@ params = {"utf8"=>"✓",
 "order"=>{"buyer_id"=>"1", "shop_id"=>"1", "order_items"=>{"1"=>{"quantity"=>"3"}, "2"=>{"quantity"=>"2"}}},
 "commit"=>"Order"}
 
-p params[:order][:buyer_id].inspect
+p params(:utf8)

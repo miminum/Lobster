@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'order_items/create'
+
   resources :orders
   devise_for :users
 

@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @order_item = OrderItem.new
   end
 
   # GET /orders/1/edit
@@ -27,7 +28,16 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     # @order.buyer_id = current_user.id
     # @order.shop_id = 1
-
+    
+    params[:order][:order_items].each do |key, value|
+      if value[:quantity]
+        @order_item = OrderItem.new
+        @order_item.order_id = @order.id
+        @order_item.item_id = key
+        @order_item.quantity = value[:quantity].to_i
+        @order_item.save
+      end
+    end
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
