@@ -13,7 +13,7 @@
   </h5>
   <p>
     <% if @order.delivery %>
-      <%= @order.buyer.full_street_address %>
+      <%= @order.buyer.profile.full_street_address %>
     <% else %>
       <%= "#{@order.shop.street_address}, #{@order.shop.suburb}, #{@order.shop.state}" %>
     <% end %>

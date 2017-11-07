@@ -1,9 +1,68 @@
 <div class="container bg-blue text-center">
   <h1 class="heading-font txt-white py-4"> My Dashboard</h1>
 </div>
-<% if current_user.shop %>
 
-<% else %>
+<div class="row">
+  <div class="col-12 col-lg-12 mb-3">
+    <div class="container bg-grey text-center">
+      <h4 class="heading-font txt-black py-4">My Purchases</h4>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Items</th>
+          <th>Delivery</th>
+          <th>Price</th>
+          <th>Order</th>
+          <th>Leave Review</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <%= order.date %><br>
+              <%= order.time %>
+            </td>
+            <td>
+              <% order.order_items.each do |order_item| %>
+                <%= order_item.quantity %> x <%= order_item.name %><br>
+              <% end %>
+            </td>
+            <td>
+              <%= order.delivery_address %>
+              <%= "from #{order.shop.street_address}, #{order.shop.suburb}, #{order.shop.state} " if order.delivery.nil? %>
+            </td>
+            <td>$<%= order.subtotal %>0</td>
+            <td>
+              <%= link_to order_path(order), class: "btn btn-red" do %>
+                <%= fa_icon "file-text-o" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to order_path(order), class: "btn btn-red" do %>
+                <%= fa_icon "square" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="container bg-grey text-center py-3">
+      <%= link_to "View All", orders_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
 
+<% if current_user.shop.nil? %>
+  <div class="row">
+    <div class= "col-lg-6 col-12">
+      <div class="bg-grey container-fluid py-5 text-center">
+        <%= link_to "Start Cooking", new_shop_path, class: "btn btn-red" %>
+      </div>
+    </div>
+  </div>
 <% end %>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+
+

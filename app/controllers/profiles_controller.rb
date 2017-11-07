@@ -2,9 +2,7 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update]
   
-  def show
-  end
-
+  
   def new
     # if user already has a profile, redirect them to the edit page if they manually type in '/myprofile/new'
     if current_user.profile

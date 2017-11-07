@@ -4,7 +4,8 @@ class ShopsController < ApplicationController
   
 
   def index
-
+    redirect_to new_profile_path if current_user.profile.nil?
+    @shops = Shop.all
   end
   def show
     @items = Item.where(shop: @shop)
@@ -14,7 +15,7 @@ class ShopsController < ApplicationController
   def new
     # if user already has a profile, redirect them to the edit page if they manually type in '/myprofile/new'
     if current_user.shop
-      redirect_to edit_shop_path, notice: "Don't be greedy!"
+      redirect_to edit_shop_path(current_user.shop), notice: "Don't be greedy!"
     else
       @shop = Shop.new
     end
