@@ -19,11 +19,21 @@ class Order < ApplicationRecord
     sum
   end
 
-  def order_date
-    created_at.strftime("%d/%m/%y at %l:%M %p")
+  def date
+    created_at.strftime("%d/%m/%y")
   end
 
-  def order_time
+  def time
     created_at.strftime("%l:%M %p")
   end
+
+  def delivery_address
+    if self.delivery
+      shop = Shop.find(self.shop_id)
+      "#{shop.street_address}, #{shop.suburb}, #{shop.state}"
+    else
+      "Pickup"
+    end
+  end
+
 end

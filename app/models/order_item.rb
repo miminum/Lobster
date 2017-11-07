@@ -7,4 +7,8 @@ class OrderItem < ApplicationRecord
   def price
     Item.find(item_id).price
   end
+
+  def name
+    Item.find(item_id).name
+  end
 end

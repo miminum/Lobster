@@ -4,79 +4,170 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-12 col-lg-6 mb-3">
     <div class="container bg-grey text-center">
       <h4 class="heading-font txt-black py-4">My Orders</h4>
     </div>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Date</th>
+          <th>Items</th>
+          <th>Delivery</th>
+          <th>Price</th>
+          <th>Order</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+        <% @orders.each do |order| %>
+          <tr>
+            <td>
+              <%= order.date %><br>
+              <%= order.time %>
+            </td>
+            <td>
+              <% order.order_items.each do |order_item| %>
+                <%= order_item.quantity %> x <%= order_item.name %><br>
+              <% end %>
+            </td>
+            <td><%= order.delivery_address %></td>
+            <td>$<%= order.subtotal %>0</td>
+            <td>
+              <%= link_to order_path(order), class: "btn btn-red" do %>
+                <%= fa_icon "file-text-o" %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to order_path(order), class: "btn btn-red" do %>
+                <%= fa_icon "square" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="container bg-grey text-center py-3">
+      <%= link_to "View All", orders_path, class: "btn btn-primary" %>
+    </div>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-12 col-lg-6">
     <div class="container bg-grey text-center">
       <h4 class="heading-font txt-black py-4">My Items</h4>
     </div>
     <div class="bg-white">
-      <% index = 1 %>
-      <% @items.each do |item| %>
-        <% if index % 2 == 0 %>
-          <div class="bg-grey py-3">
-            <span><%= item.name %></span>
-            <%= link_to "Edit", edit_item_path(item), class: "float-right" %> 
-            <%= link_to 'Destroy', items_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "float-right" %>
-          </div>
-        <% else %>
-          <div class="bg-white py-3">
-            <span><%= item.name %></span>
-            <%= link_to "Edit", edit_item_path(item), class: "float-right" %> 
-            <%= link_to 'Destroy', items_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "float-right" %>
-          </div>
-        <% end %>
-        <% index +=  1 %>
-      <% end %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name & Details</th>
+            <th>Price</th>
+            <th>Activate</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td class="col-6 col-lg-6">
+                <details class="details-width">
+                  <summary>
+                    <strong><%= item.name %></strong>
+                    <span class="float-right">
+                      <% fa_icon "carrot" if item.vegetarian %>
+                    </span>
+                  </summary>
+                  <strong>Description:</strong>
+                  <p><%= item.description %></p>
+                  <strong>Allergies:</strong>
+                  <p><%= item.allergies %></p>
+                  <strong>Image:</strong>
+                  <% if item.image_data %>
+                    <%= image_tag item.image_url(:thumb) %>
+                  <% else %>
+                    <p>No Image</p>
+                  <% end %>
+                </details>
+              </td>
+              <td><%= "$#{item.price}0" %>
+              <td>
+                <%= link_to new_item_path, class: "btn btn-red" do %>
+                  <%= fa_icon "square" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to edit_item_path(item), class: "btn btn-primary" do %>
+                  <%= fa_icon "pencil" %>
+                <% end %>
+                <%= link_to items_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-red" do %>
+                  <%= fa_icon "times" %>
+                <% end %>
+
+              </td>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-    <div class="container bg-white text-center p-3">
+    <div class="container bg-grey text-center p-3">
       <%= link_to "Add New Item", new_item_path, class: "btn btn-primary" %> 
     </div>
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-12 col-lg-6">
     <div class="container bg-grey text-center">
       <h4 class="heading-font txt-black py-4">Shop Details</h4>
     </div>
-    <div>
-      <strong>Shop: </strong><%= @shop.shop_name %>
-    </div>
-    <div>
-      <strong>Description: </strong><%= @shop.shop_description %>
-    </div>
+    <table class="table">
+      <tr>
+        <th scope="row">Name:</th>
+        <td><%= @shop.shop_name %></td>
+      </tr>
+      <tr>
+        <th scope="row">Description:</th>
+        <td><%= @shop.shop_description %></td>
+      </tr>
+      <tr>
+        <th scope="row">Cuisine</th>
+        <td><%= @shop.cuisine_type %></td>
+      </tr>
+      <tr>
+        <th scope="row">Delivery</th>
+        <td>
+          <% if @shop.delivery_km.to_i > 0 %>
+            <p>Yes, within <strong><%= @shop.delivery_km %>km</strong> of:</p>
+            <p><%= @shop.street_address %>,<br>
+            <%= @shop.suburb %>, <%= @shop.state %></p>
+          <% else %>
+            <p>Pickup from:</p>
+            <p><%= @shop.street_address %>,<br>
+            <%= @shop.suburb %>, <%= @shop.state %></p>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Shop Photo</th>
+        <td>
+          <% if @shop.shop_photo_data %>
+            <%= image_tag @shop.shop_photo_url(:thumb) %>
+          <% else %>
+            <p>No Image</p>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">Your Photo</th>
+        <td>
+          <% if @shop.shop_photo_data %>
+            <%= image_tag @shop.user_photo_url(:thumb) %>
+          <% else %>
+            <p>No Image</p>
+          <% end %>
+        </td>
+      </tr>
+    </table>
 
-</div>
+    <div class="container bg-grey text-center py-3">
+      <%= link_to "Edit Shop", edit_shop_path(@shop), class: "btn btn-primary mx-1" %>
+      <%= link_to "Go to Shop", shop_path(@shop), class: "btn btn-red mx-1" %>
+    </div>
+  </div>

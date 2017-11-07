@@ -4,7 +4,7 @@ class SellerProfilesController < ApplicationController
   
   def index
     @items = Item.where(shop: @shop)
-    @orders = Order.where(shop: @shop)
+    @orders = Order.where(shop: @shop).where.not(charge_identifier: nil).reverse
   end
 
   def show

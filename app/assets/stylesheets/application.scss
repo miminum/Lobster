@@ -2,6 +2,7 @@
 @import "dashboard";
 @import "font-awesome";
 @import "inbox";
+@import "seller_profiles";
 
 $primary-blue: #1B998B; 
 $primary-red: #AC3931;
@@ -11,6 +12,10 @@ $black: #181010;
 
 $font-body: 'Lato', sans-serif;
 $font-heading: 'Cantata One', serif;
+
+body {
+    font-family: $font-body;
+}
 
 .heading-font {
     font-family: $font-heading;
@@ -72,6 +77,17 @@ $font-heading: 'Cantata One', serif;
     border-color: $primary-blue;
   }
   
+  .btn-red {
+    color: $white;
+    background-color: $primary-red;
+    border-color: $primary-red;
+  }
+  
+ .btn-red:hover {
+    color: $white;
+    background-color: $primary-red;
+    border-color: $primary-grey;
+  }
   
   
   
