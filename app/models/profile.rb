@@ -3,7 +3,10 @@ class Profile < ApplicationRecord
   validates :phone_number, format: { with: /\A\d{10}\z/, message: "numbers only" }
   belongs_to :user
   
-  def full_address
-    "#{street_address}, #{suburb} "
+  geocoded_by :full_street_address   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+
+  def full_street_address
+    "#{street_address}, #{suburb}, #{state}, AU"
   end
 end

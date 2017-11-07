@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.save
     params["order"]["order_items"].each do |key, value|
-      if value["quantity"]
+      if value["quantity"].to_i > 0
         @order_item = OrderItem.new
         @order_item.order_id = @order.id
         @order_item.item_id = key
@@ -37,10 +37,6 @@ class OrdersController < ApplicationController
         @order_item.save
       end
     @order.total_price = @order.subtotal
-    
-    # @order.buyer_id = current_user.id
-    # @order.shop_id = 1
-    
     end
   
     respond_to do |format|
