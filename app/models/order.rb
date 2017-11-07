@@ -3,7 +3,6 @@ class Order < ApplicationRecord
   belongs_to :shop
   has_many :order_items
 
-
   def delivery_price
     if delivery
       Shop.find(shop_id).delivery_cost
@@ -18,5 +17,13 @@ class Order < ApplicationRecord
       sum += item.quantity * item.price
     end
     sum
+  end
+
+  def order_date
+    created_at.strftime("%d/%m/%y at %l:%M %p")
+  end
+
+  def order_time
+    created_at.strftime("%l:%M %p")
   end
 end

@@ -4,6 +4,7 @@ class SellerProfilesController < ApplicationController
   
   def index
     @items = Item.where(shop: @shop)
+    @orders = Order.where(shop: @shop)
   end
 
   def show
