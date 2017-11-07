@@ -35,5 +35,6 @@ class Order < ApplicationRecord
       "Pickup"
     end
   end
+  
 
 end

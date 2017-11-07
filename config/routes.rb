@@ -25,9 +25,9 @@ Rails.application.routes.draw do
   get '/sellerprofile', to: 'seller_profiles#index', as: 'seller_profile'
   
   # Routes for shop
-  resources :shops, only: [:show, :new, :update, :edit, :destroy]   
+  resources :shops
   # Routes for items
-  resources :items
+  resources :items,only: [:new, :update, :edit, :destroy] 
   
   # Routes for conversations
   resources :conversations do

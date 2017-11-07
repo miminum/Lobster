@@ -3,6 +3,7 @@
 @import "font-awesome";
 @import "inbox";
 @import "seller_profiles";
+@import "shops";
 
 $primary-blue: #1B998B; 
 $primary-red: #AC3931;
@@ -26,6 +27,9 @@ body {
 .bg-grey {
     background-color: $primary-grey;
 }
+.bg-red {
+    background-color: $primary-red;
+}
 .bg-white {
     background-color: $white;
 }
@@ -38,13 +42,16 @@ body {
 .txt-black {
     color: $black;
 }
+.txt-grey {
+    color: $primary-grey;
+}
 .fill { 
     min-height: 100vh;
     height: 100vh;
 }
 .navbar-title {
     font-family: 'Lobster', cursive;
-    font-size: 28px;
+    font-size: 36px;
     color: $black;
 }
 

@@ -1,58 +1,109 @@
-<h1></h1>
-
-
-<h2><%= @shop.shop_name %></h2>
-<p><%= @shop.shop_description %></p>
-
-<% if @shop.shop_photo_data %>
-  <%= image_tag @shop.shop_photo_url(:thumb) %>
-<% end %>
-<% if @shop.user_photo_data %>
-  <%= image_tag @shop.user_photo_url(:thumb) %>
-<% end %>
-
-
-
-  
-<%= form_with(model: @order, local: true) do |form| %>
-  <%= form.hidden_field :buyer_id, :value => current_user.id %>
-  <%= form.hidden_field :shop_id, :value => @shop.id %>
-  
-  <%= form.fields_for :order_items do |items_form| %>
-    <% @items.each do |item| %>
-      <details>
-        <summary>
-          <%= item.name %>
-            <%= items_form.fields_for "#{item.id}" do |item_form| %>
-              <%= form.label item.name %>
-              <%= item_form.text_field :quantity %>
-            <% end %>
-        </summary>
-          <table>
-            <tr><%= item.description %></tr>
-            <tr>
-              <td>
-                <% if item.image_data %>  
-                  <%= image_tag item.image_url(:thumb) %>
-                <% end %>
-              </td>
-              <td>
-                <%= "Price: $#{item.price}" %>
-              </td>
-            </tr>
-          </table>
-      </details>
-    <% end %>
+<div class="shop-banner">
+  <% if @shop.shop_photo_data %>
+    <%= image_tag @shop.shop_photo_url(:original), class: "w-100" %>
+  <% else %>
+    <img class="w-100" src="https://static.businessinsider.com/image/51f03f966bb3f73c7700000b/image.jpg" alt="poo">
   <% end %>
-
-  <div>
-    <%= form.check_box :paid %>
-    <span> Delivery to:</span>
-    <div>
-      <%= current_user.profile.full_address %>
+</div>
+<div class="container bg-red py-2 w100">
+  <div class="row">
+    <div class="col-8 col-lg-10">
+      <h2 class="shop-header"><%= @shop.shop_name %><small class="txt-grey"> by <%= @shop.owner.profile.first_name%></small></h2>
+      <p class="txt-grey w-50"><%= @shop.shop_description %></p>
+      <h3 class="heading-font">[Review Placeholder]</h3>
+    </div>
+    <div class="col-4 col-lg-2">
+      <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @shop.user_id), class: "btn btn-secondary mt-2", method: 'post' do %>
+        <%= fa_icon "envelope", text: "Message me!" %>
+      <% end %>
+      <br><br>
+      <span class="txt-white pt-2">
+        <% if @shop.delivery_km > 0 %>
+          <%= fa_icon "car", text: "Delivery within #{@shop.delivery_km}km" %>
+        <% else %>
+          <%= fa_icon "car", text: "Pickup only" %>
+        <% end %>
+      </span>
     </div>
   </div>
-  <div class="actions">
-    <%= form.submit "Order"%>
+  <details class="bg-grey">
+    <summary class="bg-red txt-white larger">About Seller</summary>
+    <p>
+      Hello, I am <%= @shop.owner.profile.first_name %>
+    </p>
+    <% if @shop.user_photo_data %>
+      <%= image_tag @shop.user_photo_url(:thumb) %>
+    <% end %>
+  </details>
+</div>
+<div>
+  <div class="container bg-grey text-center">
+    <h4 class="heading-font txt-black py-4">Order Form</h4>
   </div>
-<% end %>
+<div>
+  <%= form_with(model: @order, local: true) do |form| %>
+    <%= form.hidden_field :buyer_id, :value => current_user.id %>
+    <%= form.hidden_field :shop_id, :value => @shop.id %>
+  
+    <%= form.fields_for :order_items do |items_form| %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="col-8">Name & Details</th>
+            <th class="col-2">Price</th>
+            <th class="col-2">Quantity</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          
+          <% @items.each do |item| %>
+            <tr>
+              <td class="col-8">
+                <details>
+                  <summary>
+                    <p><%= item.name %></p>
+                  </summary>
+                  <strong>Description:</strong>
+                  <p><%= item.description %></p>
+                  <strong>Allergies:</strong>
+                  <p><%= item.allergies %></p>
+                  <strong>Image:</strong>
+                  <% if item.image_data %>
+                    <%= image_tag item.image_url(:thumb) %>
+                  <% else %>
+                    <p>No Image</p>
+                  <% end %>
+                </details>
+              </td>
+              <td class="col-2">
+                <p><%= "$#{item.price}0" %></p>
+              </td>
+              <td class="col-2">
+                <%= items_form.fields_for "#{item.id}" do |item_form| %>
+                  <%= item_form.text_field :quantity %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>  
+    <% end %>
+    
+    <div class="row">
+      <div class="col-4 col-lg-2 offset-8 offset-lg-10">
+        <span>
+          <%= form.check_box :delivery %>
+        </span>
+        <span>Delivery to:</span>
+        <div class="float-right">
+          <%= current_user.profile.full_street_address %>
+          <p><%= " + $#{@shop.delivery_cost}.00" %></p>
+        </div>
+        <div class="actions">
+          <%= form.submit "Order", class: "btn btn-primary p-3 float-right mt-3"%>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

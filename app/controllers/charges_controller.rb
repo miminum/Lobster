@@ -22,7 +22,7 @@ class ChargesController < ApplicationController
     
     @order.charge_identifier = charge.id
     @order.save
-    redirect_to orders_path if @order.save
+    redirect_to order_path(@order) if @order.save
 
     rescue Stripe::CardError => e
         flash[:error] = e.message

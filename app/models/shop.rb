@@ -19,4 +19,8 @@ class Shop < ApplicationRecord
   def state
     User.find(self.user_id).profile.state
   end
+
+  def owner
+    User.find(self.user_id)
+  end
 end

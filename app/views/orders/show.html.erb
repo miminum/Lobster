@@ -1,39 +1,106 @@
-<p id="notice"><%= notice %></p>
+<div class="container bg-red text-center">
+  <h4 class="heading-font txt-white py-4">Order #000<%= @order.id%></h4>
+  <p id="notice"><small><%= notice %></small></p>
+</div>
 
-<p>
-  <strong>Buyer:</strong>
-  <%= @order.buyer %>
-</p>
+<div class="container bg-grey text-center">
+  <h5 class="heading-font txt-black py-2">
+    <% if @order.delivery %>
+      Deliver to:
+    <% else %>
+      Pickup from:
+    <% end %>
+  </h5>
+  <p>
+    <% if @order.delivery %>
+      <%= @order.buyer.full_street_address %>
+    <% else %>
+      <%= "#{@order.shop.street_address}, #{@order.shop.suburb}, #{@order.shop.state}" %>
+    <% end %>
+  </p>
+</div>
 
-<p>
-  <strong>Shop:</strong>
-  <%= @order.shop %>
-</p>
 
-<p>
-  <strong>Delivery:</strong>
-  <%= @order.delivery %>
-</p>
 
-<p>
-  <strong>Total price:</strong>
-  <%= @order.total_price %>
-</p>
+<table class="table">
+  <tbody>
+  <tr>
+    <th class="w-25" scope="row">Date</th>
+    <td ><%= @order.date %></td>
+  </tr>
+  <tr>
+    <th scope="row">Time</th>
+    <td><%= @order.time %></td>
+  </tr>
+  <tr>
+    <th scope="row">Seller</th>
+    <td>
+      <%= @order.shop.shop_name %><br>
+      <%= @order.shop.owner.email %><br>
+      <%= @order.shop.owner.profile.first_name %> 
+      <%= @order.shop.owner.profile.last_name %>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">Buyer</th>
+    <td>
+      <%= @order.buyer.email %><br>
+      <%= @order.buyer.profile.first_name %>
+      <%= @order.buyer.profile.last_name %>      
+    </td>
+  </tr>
+  </tbody>
+</table>
+<table class="table">
+  <thead class="bg-grey">
+    <tr>
+      <td>Item Name:</td>
+      <td>Quantity:</td>
+      <td>Price:</td>
+      <td>Subtotal</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |order_item|%>
+      <tr>
+        <td><%= order_item.item.name %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= "$#{order_item.item.price}0" %></td>
+        <td><%= "$#{order_item.quantity * order_item.item.price}0" %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <strong>Shipping: </strong>
+        <br>
+        <%= @order.delivery_address %>
+      </td>
+      <td></td>
+      <td></td>
+      <td><%= "$#{@order.delivery_price}.00" %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Grand total:</strong>
+      </td>
+      <td></td>
+      <td></td>
+      <td><%= "$#{@order.subtotal}0" %></td>
+    </tr>
+  </tbody>
+</table>
 
-<p>
-  <strong>Charge identifier:</strong>
-  <%= @order.charge_identifier %>
-</p>
 
-<p>
-  <strong>Payment success:</strong>
-  <%= @order.payment_success %>
-</p>
+<div class="container text-center">
+  <% if current_user = @order.buyer %>
+    <%= link_to 'Back', dashboard_path, class: "btn btn-primary" %>
+  <% elsif current_user = @order.shop.owner %>
+    <%= link_to 'Back', dashboard_path, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to 'Back', home_path, class: "btn btn-primary" %>
+  <% end %>
+</div>
 
-<p>
-  <strong>Mark as done:</strong>
-  <%= @order.mark_as_done %>
-</p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+
+

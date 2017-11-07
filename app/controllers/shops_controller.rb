@@ -2,6 +2,10 @@ class ShopsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shop, only: [:show, :edit, :update]
   
+
+  def index
+
+  end
   def show
     @items = Item.where(shop: @shop)
     @order = Order.new
@@ -10,7 +14,7 @@ class ShopsController < ApplicationController
   def new
     # if user already has a profile, redirect them to the edit page if they manually type in '/myprofile/new'
     if current_user.shop
-      redirect_to edit_shop_path
+      redirect_to edit_shop_path, notice: "Don't be greedy!"
     else
       @shop = Shop.new
     end

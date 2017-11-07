@@ -4,7 +4,7 @@
 </div>
 
 <div class="row">
-  <div class="col-12 col-lg-6 mb-3">
+  <div class="col-12 col-lg-12 mb-3">
     <div class="container bg-grey text-center">
       <h4 class="heading-font txt-black py-4">My Orders</h4>
     </div>
@@ -49,67 +49,6 @@
     </table>
     <div class="container bg-grey text-center py-3">
       <%= link_to "View All", orders_path, class: "btn btn-primary" %>
-    </div>
-  </div>
-
-  <div class="col-12 col-lg-6">
-    <div class="container bg-grey text-center">
-      <h4 class="heading-font txt-black py-4">My Items</h4>
-    </div>
-    <div class="bg-white">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name & Details</th>
-            <th>Price</th>
-            <th>Activate</th>
-            <th>Edit/Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @items.each do |item| %>
-            <tr>
-              <td class="col-6 col-lg-6">
-                <details class="details-width">
-                  <summary>
-                    <strong><%= item.name %></strong>
-                    <span class="float-right">
-                      <% fa_icon "carrot" if item.vegetarian %>
-                    </span>
-                  </summary>
-                  <strong>Description:</strong>
-                  <p><%= item.description %></p>
-                  <strong>Allergies:</strong>
-                  <p><%= item.allergies %></p>
-                  <strong>Image:</strong>
-                  <% if item.image_data %>
-                    <%= image_tag item.image_url(:thumb) %>
-                  <% else %>
-                    <p>No Image</p>
-                  <% end %>
-                </details>
-              </td>
-              <td><%= "$#{item.price}0" %>
-              <td>
-                <%= link_to new_item_path, class: "btn btn-red" do %>
-                  <%= fa_icon "square" %>
-                <% end %>
-              </td>
-              <td>
-                <%= link_to edit_item_path(item), class: "btn btn-primary" do %>
-                  <%= fa_icon "pencil" %>
-                <% end %>
-                <%= link_to items_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-red" do %>
-                  <%= fa_icon "times" %>
-                <% end %>
-
-              </td>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <div class="container bg-grey text-center p-3">
-      <%= link_to "Add New Item", new_item_path, class: "btn btn-primary" %> 
     </div>
   </div>
 
@@ -171,3 +110,65 @@
       <%= link_to "Go to Shop", shop_path(@shop), class: "btn btn-red mx-1" %>
     </div>
   </div>
+
+  <div class="col-12 col-lg-6 float-left">
+    <div class="container bg-grey text-center">
+      <h4 class="heading-font txt-black py-4">My Items</h4>
+    </div>
+    <div class="bg-white">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name & Details</th>
+            <th>Price</th>
+            <th>Activate</th>
+            <th>Edit/Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+            <tr>
+              <td class="col-6 col-lg-6">
+                <details class="details-width">
+                  <summary>
+                    <strong><%= item.name %></strong>
+                    <span class="float-right">
+                      <% fa_icon "leaf" if item.vegetarian %>
+                    </span>
+                  </summary>
+                  <strong>Description:</strong>
+                  <p><%= item.description %></p>
+                  <strong>Allergies:</strong>
+                  <p><%= item.allergies %></p>
+                  <strong>Image:</strong>
+                  <% if item.image_data %>
+                    <%= image_tag item.image_url(:thumb) %>
+                  <% else %>
+                    <p>No Image</p>
+                  <% end %>
+                </details>
+              </td>
+              <td><%= "$#{item.price}0" %>
+              <td>
+                <%= link_to new_item_path, class: "btn btn-red" do %>
+                  <%= fa_icon "square" %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to edit_item_path(item), class: "btn btn-primary" do %>
+                  <%= fa_icon "pencil" %>
+                <% end %>
+                <%= link_to seller_profile_path, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-red" do %>
+                  <%= fa_icon "times" %>
+                <% end %>
+
+              </td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="container bg-grey text-center p-3">
+      <%= link_to "Add New Item", new_item_path, class: "btn btn-primary" %> 
+    </div>
+  </div>
+
