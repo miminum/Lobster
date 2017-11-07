@@ -19,15 +19,14 @@ class ChargesController < ApplicationController
     :description => 'Rails Stripe customer',
     :currency    => 'aud'
     )
+    
+    @order.charge_identifier = charge.id
+    @order.save
+    redirect_to orders_path if @order.save
 
     rescue Stripe::CardError => e
         flash[:error] = e.message
-        redirect_to new_charge_path
-
-    @order.update_attribute(:charge_identifier, charge.id) 
-    @order.save
-
-    redirect_to orders_path
+    
   end
 
   private

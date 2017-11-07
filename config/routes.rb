@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   post 'order_items/create', to:'order_items#create', as: 'order_items'
   # Orders
   resources :orders do
-    resources :charges, only: [:new, :create]
+    get '/payment', to: 'charges#new', as: 'new_charge'
+    resources :charges, only: [:create]
   end
   devise_for :users
 
