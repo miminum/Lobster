@@ -194,8 +194,20 @@
               </td>
               <td><%= "$#{item.price}0" %>
               <td>
-                <%= link_to new_item_path, class: "btn btn-red" do %>
-                  <%= fa_icon "square" %>
+                <% if item.active? %>
+                  <%= form_for item do |f| %>
+                    <%= f.hidden_field :active, value: false %>
+                    <%= f.button :submit, class: "btn btn-red" do %>
+                      <%= fa_icon "stop", text: "De-activate" %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= form_for item do |f| %>
+                    <%= f.hidden_field :active, value: true %>
+                    <%= f.button :submit, class: "btn btn-primary" do %>
+                      <%= fa_icon "play", text: "Activate" %>
+                    <% end %>
+                  <% end %>
                 <% end %>
               </td>
               <td>

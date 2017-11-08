@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   # Routes for shop
   resources :shops
   # Routes for items
-  resources :items,only: [:new, :update, :edit, :destroy] 
+  resources :items, only: [:new, :create, :update, :edit, :destroy] 
   
   # Routes for conversations
   resources :conversations do
