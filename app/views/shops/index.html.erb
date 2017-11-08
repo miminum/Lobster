@@ -20,12 +20,23 @@
   <% end %>
 </div>
 
-<div>
-  
+<div class="row mt-5 m-0 p-0">
   <% @shops.each_with_index do |shop, index| %>
-    <div>
+    <div class="col-12 col-lg-4">
+      <div class="shop-lists">
+        <%= link_to shop_path(shop) do %>
+          <%= image_tag shop.shop_photo_url(:medium), class: "w-100" %>
+        <% end %>
+      </div>
+      <h6 class="text-black"><%= shop.shop_name %> 
+        <em class="text-grey"><%= shop.cuisine_type %></em>
+        <span class="float-right"><%= fa_icon "car", text: "Pickup only" %></span>
+        <em class="float-right"><%= "#{shop.suburb}" %></em>
+      </h6>
     </div>
-    <% if index % 3 == 0 %>
+    <% if index > 0 && index % 3 == 0 %>
+    </div>
+    <div class="row">
     <% end %>
   <% end %>
 </div>

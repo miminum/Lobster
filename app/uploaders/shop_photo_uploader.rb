@@ -7,7 +7,7 @@ class ShopPhotoUploader < Shrine
     plugin :remove_attachment
     plugin :store_dimensions
     plugin :validation_helpers
-    plugin :versions, names: [:original, :thumb]
+    plugin :versions, names: [:original, :store, :thumb]
   
     Attacher.validate do
       validate_max_size 2.megabytes, message: 'is too large (max is 2 MB)'
@@ -17,8 +17,10 @@ class ShopPhotoUploader < Shrine
     def process(io, context)
       case context[:phase]
       when :store
-        thumb = resize_to_limit!(io.download, 200, 200)
-        { original: io, thumb: thumb }
+        size_400 = resize_to_limit!(io.download, 400, 300)
+        thumb = resize_to_limit(size_400, 200, 200)
+        
+        { original: io, medium: size_400, thumb: thumb }
       end
     end
   end
