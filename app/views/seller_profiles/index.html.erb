@@ -29,7 +29,9 @@
           <th>Delivery</th>
           <th>Price</th>
           <th>Order</th>
-          <th>Status</th>
+          <th>Mark as done</th>
+          <th>Mark as Delivered/<br>
+          Picked up</th>
         </tr>
       </thead>
       <tbody>
@@ -52,7 +54,7 @@
               <% end %>
             </td>
             <td>
-            <% if order.done? %>
+              <% if order.done? %>
                 <%= form_for order do |f| %>
                   <%= f.hidden_field :mark_as_done, value: false %>
                   <%= f.button :submit, class: "btn btn-red" do %>
@@ -64,6 +66,23 @@
                   <%= f.hidden_field :mark_as_done, value: true %>
                   <%= f.button :submit, class: "btn btn-primary" do %>
                     <%= fa_icon "check-square" %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <% if order.delivered %>
+                <%= form_for order do |f| %>
+                  <%= f.hidden_field :delivered, value: false %>
+                  <%= f.button :submit, class: "btn btn-primary" do %>
+                    <%= fa_icon "check-square" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= form_for order do |f| %>
+                  <%= f.hidden_field :delivered, value: true %>
+                  <%= f.button :submit, class: "btn btn-red" do %>
+                    <%= fa_icon "car" %>
                   <% end %>
                 <% end %>
               <% end %>
