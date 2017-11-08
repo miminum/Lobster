@@ -52,8 +52,20 @@
               <% end %>
             </td>
             <td>
-              <%= link_to order_path(order), class: "btn btn-red" do %>
-                <%= fa_icon "square" %>
+            <% if order.done? %>
+                <%= form_for order do |f| %>
+                  <%= f.hidden_field :mark_as_done, value: false %>
+                  <%= f.button :submit, class: "btn btn-red" do %>
+                    <%= fa_icon "square" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= form_for order do |f| %>
+                  <%= f.hidden_field :mark_as_done, value: true %>
+                  <%= f.button :submit, class: "btn btn-primary" do %>
+                    <%= fa_icon "check-square" %>
+                  <% end %>
+                <% end %>
               <% end %>
             </td>
           </tr>

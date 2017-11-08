@@ -36,5 +36,8 @@ class Order < ApplicationRecord
     end
   end
   
+  def done?
+    mark_as_done
+  end
 
 end
