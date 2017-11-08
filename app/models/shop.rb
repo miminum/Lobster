@@ -42,4 +42,13 @@ class Shop < ApplicationRecord
   def owner
     User.find(self.user_id)
   end
+
+  def average_score
+    average =  Review.where(shop: self).average(:score)
+    '%.1f' % average if average
+  end
+
+  def reviews
+    Review.where(shop: self)
+  end
 end

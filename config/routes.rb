@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  
   post 'order_items/create', to:'order_items#create', as: 'order_items'
   # Orders
   resources :orders do
     get '/payment', to: 'charges#new', as: 'new_charge'
     resources :charges, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
   devise_for :users
 
@@ -23,7 +25,9 @@ Rails.application.routes.draw do
   # Routes for seller profile
   
   # Routes for shop
-  resources :shops
+  resources :shops do
+    resources :reviews, only: [:index]
+  end
   # Routes for items
   resources :items, only: [:new, :create, :update, :edit, :destroy] 
   

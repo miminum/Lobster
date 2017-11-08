@@ -5,12 +5,32 @@
     <span class="col-12 col-lg-12">
       <h5 class="heading-font txt-grey pb-3"><%= "#{@shop.owner.profile.first_name}, #{@shop.owner.email}" %></h5>
     </span>
+    <div class="col-12">
+      <h5 class="body-font txt-grey">
+        <span class="txt-grey">
+          
+          <% score = @shop.average_score %>
+          <% score_whole = score.to_i.floor %>
+          <% remainder = score.to_f - score_whole.to_f  %>
+          <% score_whole.times do %>
+            <%= fa_icon "star" %>
+          <% end %>
+          <% if remainder > 0.25 %>
+            <%= fa_icon "star-half" %>
+          <% end %>
+        </span>
+        <small><%= "Average Rating: #{score} from #{@shop.reviews.count} reviews" %></small>
+      </h5>
+    </div>
     <span class="col-12 col-lg-12">
       <%= link_to edit_profile_path, class: "btn btn-red mb-4" do %>
         <%= fa_icon "pencil", text: "Edit My Details" %>
       <% end %>
       <%= link_to @shop, class: "btn btn-red mb-4" do %>
         <%= fa_icon "shopping-bag", text: "My Shop" %>
+      <% end %>
+      <%= link_to shop_reviews_path(@shop), class: "btn btn-red mb-4" do %>
+        <%= fa_icon "bathtub", text: "My Reviews" %>
       <% end %>
     </span>
   </div>

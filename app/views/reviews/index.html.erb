@@ -1,0 +1,51 @@
+<div class="container bg-red text-center">
+  <h4 class="heading-font txt-white pt-4">Reviews for <%= @shop.shop_name %></h4>
+  <h6 class="heading-font txt-grey mb-1">Reviews for <%= "by #{@shop.owner.profile.first_name}" %></h6>
+  <h5 class="body-font txt-grey pb-4">
+    <span class="txt-grey">
+      
+      <% score = @shop.average_score %>
+      <% score_whole = score.to_i.floor %>
+      <% remainder = score.to_f - score_whole.to_f  %>
+      <% score_whole.times do %>
+        <%= fa_icon "star" %>
+      <% end %>
+      <% if remainder > 0.25 %>
+        <%= fa_icon "star-half" %>
+      <% end %>
+    </span>
+    <small><%= "Average Rating: #{score} from #{@shop.reviews.count} reviews" %></small>
+  </h5>
+  <p id="notice"><small><%= notice %></small></p>
+</div>
+<table class="table">
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td class="col-2">
+          <span class="txt-blue">
+            <% review.score.times do %>
+              <%= fa_icon "star" %>
+            <% end %>
+          </span>
+        </td>
+        <td class="col-6">
+          <%= review.content %>
+        </td>
+        <td>
+          <%= "Review by: #{review.user.profile.first_name}" %>
+        </td>
+        <td>
+          <%= " #{review.created_at.Date}" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="container">
+  <% if current_user == @shop.owner %>
+    <%= link_to 'Back', seller_profile_path %>
+  <% else %>
+    <%= link_to 'Back', @shop %>
+  <% end %>
+<div>

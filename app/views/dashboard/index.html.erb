@@ -58,8 +58,14 @@
               <% end %>
             </td>
             <td>
-              <%= link_to order_path(order), class: "btn btn-red" do %>
-                <%= fa_icon "square" %>
+              <% if order.review %>
+                <div class="btn btn-primary">
+                  <%= fa_icon "check-square", text: "Reviewed" %>
+                </div>
+              <% else %>
+                <%= link_to new_order_review_path(order), class: "btn btn-red" do %>
+                  <%= fa_icon "square" %>
+                <% end %>
               <% end %>
             </td>
           </tr>

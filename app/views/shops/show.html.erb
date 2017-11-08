@@ -9,8 +9,22 @@
   <div class="row">
     <div class="col-8 col-lg-10">
       <h2 class="shop-header"><%= @shop.shop_name %><small class="txt-grey"> by <%= @shop.owner.profile.first_name%></small></h2>
+      <p class="body-font txt-grey">
+        <span class="txt-grey">
+          
+          <% score = @shop.average_score %>
+          <% score_whole = score.to_i.floor %>
+          <% remainder = score.to_f - score_whole.to_f  %>
+          <% score_whole.times do %>
+            <%= fa_icon "star" %>
+          <% end %>
+          <% if remainder > 0.25 %>
+            <%= fa_icon "star-half" %>
+          <% end %>
+        </span>
+        <small><%= "Average Rating: #{score} from #{@shop.reviews.count} reviews" %></small>
+      </p>
       <p class="txt-grey w-50"><%= @shop.shop_description %></p>
-      <h3 class="heading-font">[Review Placeholder]</h3>
     </div>
     <div class="col-4 col-lg-2">
       <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @shop.user_id), class: "btn btn-secondary mt-2", method: 'post' do %>

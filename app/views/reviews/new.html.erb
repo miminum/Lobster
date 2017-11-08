@@ -1,0 +1,78 @@
+<div class="container-fluid text-center bg-red py-3 mb-2">
+  <h3 class= "heading-font text-black">New Review for Order <%= "#000#{@order.id}" %></h1>
+</div>
+<%= render 'form', review: @review %>
+<div class="container-fluid text-center bg-red py-3 mb-2 mt-2">
+  <h3 class= "heading-font text-black">Order Details</h1>
+</div>
+<table class="table mt-2">
+  <tbody>
+  <tr>
+    <th class="w-25" scope="row">Date</th>
+    <td ><%= @order.date %></td>
+  </tr>
+  <tr>
+    <th scope="row">Time</th>
+    <td><%= @order.time %></td>
+  </tr>
+  <tr>
+    <th scope="row">Seller</th>
+    <td>
+      <%= @order.shop.shop_name %><br>
+      <%= @order.shop.owner.email %><br>
+      <%= @order.shop.owner.profile.first_name %> 
+      <%= @order.shop.owner.profile.last_name %>
+    </td>
+  </tr>
+  <tr>
+    <th scope="row">Buyer</th>
+    <td>
+      <%= @order.buyer.email %><br>
+      <%= @order.buyer.profile.first_name %>
+      <%= @order.buyer.profile.last_name %>      
+    </td>
+  </tr>
+  </tbody>
+</table>
+<table class="table">
+  <thead class="bg-grey">
+    <tr>
+      <td>Item Name:</td>
+      <td>Quantity:</td>
+      <td>Price:</td>
+      <td>Subtotal</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |order_item|%>
+      <tr>
+        <td><%= order_item.item.name %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= "$#{order_item.item.price}0" %></td>
+        <td><%= "$#{order_item.quantity * order_item.item.price}0" %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <strong>Delivery: </strong>
+        <br>
+        <%= @order.delivery_address %>
+      </td>
+      <td></td>
+      <td></td>
+      <td><%= "$#{@order.delivery_price}.00" %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Grand total:</strong>
+      </td>
+      <td></td>
+      <td></td>
+      <td><%= "$#{@order.subtotal}0" %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="text-center container-fluid mt-3">
+  <%= link_to 'Back', dashboard_path, class: "btn btn-secondary" %>
+</div>

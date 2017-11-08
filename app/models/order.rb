@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   belongs_to :buyer, :foreign_key => :buyer_id, class_name: 'User'
   belongs_to :shop
   has_many :order_items
+  has_one :review
 
   def delivery_price
     if delivery
@@ -38,6 +39,10 @@ class Order < ApplicationRecord
   
   def done?
     mark_as_done
+  end
+
+  def shop
+    Shop.find(shop_id)
   end
 
 end
