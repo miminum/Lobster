@@ -39,7 +39,7 @@
 
   <div class="field">
     <%= form.label :state %>
-    <%= form.text_field :state, id: :profile_state %>
+    <%= form.select(:state, Profile::STATES, {}, { :class => 'custom-select' }) %> 
   </div>
 
   <div class="actions">

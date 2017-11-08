@@ -12,7 +12,7 @@
   <body>
     <div class="container px-0 pb-0">
       <nav class="container-fluid bg-grey pb-0 navbar-shadow">
-        <a class="navbar-brand navbar-title" href="/">Lobster</a>
+        <a class="navbar-brand navbar-title" href="/shops">Lobster</a>
         <% if user_signed_in? %>
           <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-secondary float-right mr-1 mt-2', method: :delete %>
           <%= link_to dashboard_path, class: "btn float-right ml-1 mr-3 navbar-title" do %>

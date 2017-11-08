@@ -1,6 +1,19 @@
 <div class="container bg-blue text-center">
   <h1 class="heading-font txt-white pt-3">My Shop Dashboard</h1>
   <h3 class="heading-font txt-white pb-3"><%= @shop.shop_name %></h3>
+  <div class="row">
+    <span class="col-12 col-lg-12">
+      <h5 class="heading-font txt-grey pb-3"><%= "#{@shop.owner.profile.first_name}, #{@shop.owner.email}" %></h5>
+    </span>
+    <span class="col-12 col-lg-12">
+      <%= link_to edit_profile_path, class: "btn btn-red mb-4" do %>
+        <%= fa_icon "pencil", text: "Edit My Details" %>
+      <% end %>
+      <%= link_to @shop, class: "btn btn-red mb-4" do %>
+        <%= fa_icon "shopping-bag", text: "My Shop" %>
+      <% end %>
+    </span>
+  </div>
 </div>
 
 <div class="row">
