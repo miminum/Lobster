@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Lobster</title>
+    <title>Lobster: Home Meals</title>
     <%= csrf_meta_tags %>
     
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Cantata+One|Lato:400,400i|Lobster" rel="stylesheet">
+    
+    
+    <%= favicon_link_tag 'favicon-32x32.png' %>
   </head>
 
   <body>
@@ -15,15 +18,15 @@
         <a class="navbar-brand navbar-title" href="/shops">Lobster</a>
         <% if user_signed_in? %>
           <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-secondary float-right mr-1 mt-2', method: :delete %>
-          <%= link_to dashboard_path, class: "btn float-right ml-1 mr-3 navbar-title" do %>
-            <%= fa_icon "user" %>
+          <%= link_to dashboard_path, class: "btn float-right ml-1 mr-3 txt-black mt-2" do %>
+            <%= fa_icon "user 2x" %>
           <% end %>
-          <%= link_to conversations_path, class: "btn float-right mx-1 navbar-title" do %>
-            <%= fa_icon "envelope" %>
+          <%= link_to conversations_path, class: "btn float-right mx-1 txt-black mt-2" do %>
+            <%= fa_icon "envelope 2x" %>
           <% end %>
           <% if current_user.shop %>
-            <%= link_to seller_profile_path, class: "btn float-right mx-1 navbar-title" do %>
-              <%= fa_icon "shopping-cart" %>
+            <%= link_to seller_profile_path, class: "btn float-right mx-1 txt-black mt-2" do %>
+              <%= fa_icon "shopping-cart 2x" %>
             <% end %>
           <% end %>
         <% else %>
