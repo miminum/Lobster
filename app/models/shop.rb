@@ -75,7 +75,7 @@ class Shop < ApplicationRecord
 
   def self.filter_by(word, user)
     if word == "Distance"
-      filtered = self.active_items.sort_by {|shop| shop.distance_from_user(user) }.reverse
+      filtered = self.active_items.sort_by {|shop| shop.distance_from_user(user) }
     elsif word == "Review Score"
       filtered = self.active_items.sort_by {|shop| shop.average_score.to_i }.reverse
     elsif word == "Popularity"
@@ -86,7 +86,7 @@ class Shop < ApplicationRecord
 
   def self.filter_search_by(term, word, user)
     if word == "Distance"
-      filtered = self.search(term).sort_by {|shop| shop.distance_from_user(user) }.reverse
+      filtered = self.search(term).sort_by {|shop| shop.distance_from_user(user) }
     elsif word == "Review Score"
       filtered = self.search(term).sort_by {|shop| shop.average_score.to_i }.reverse
     elsif word == "Popularity"
