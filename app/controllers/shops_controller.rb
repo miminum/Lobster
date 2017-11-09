@@ -2,21 +2,25 @@ class ShopsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shop, only: [:show, :edit, :update]
   
-
+  
+  # @shops = Shop.active_items.sort_by {|shop| shop.average_score.to_i }.reverse
+  # @shops = Shop.active_items.sort_by {|shop| distance_from_user(current_user) }.reverse
   def index
     redirect_to new_profile_path if current_user.profile.nil?
-    
-    @shops = Shop.active_items.sort_by {|shop| shop.popularity }.reverse
-    # @shops = Shop.active_items.sort_by {|shop| shop.average_score.to_i }.reverse
-    # @shops = Shop.active_items.sort_by {|shop| distance_from_user(current_user) }.reverse
-    # if params[:term]
-    #   # Searches for search word in Item's name, description.
-    #   # Also earches for word in Shop's shop_name and cuisine_type
-    #   # returns unique isntances
-    #   @shops = Shop.search(params[:term])
-    # else
-    #   @shops = Shop.active_items
-    # end
+    if params[:filter] && params[:term]
+      @shops = Shop.filter_search_by(params[:term], params[:filter], current_user)
+
+    elsif params[:filter]
+      @shops = Shop.filter_by(params[:filter], current_user)
+
+    elsif params[:term]
+      # Searches for search word in Item's name, description.
+      # Also earches for word in Shop's shop_name and cuisine_type
+      # returns unique isntances
+      @shops = Shop.search(params[:term])
+    else
+      @shops = Shop.active_items
+    end
   end
 
   def show

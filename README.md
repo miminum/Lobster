@@ -75,3 +75,4 @@ ERD: http://dbdesigner.net/designer/schema/122923
 * Font Awesome (they have awesome icons)
 * Stripe
 * Shrine and dependencies
+* AWS-k

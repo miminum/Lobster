@@ -19,7 +19,9 @@
     </div>
   <% end %>
   <div class="container text-center">
-    <%= form_with scope: :shop, local: true, method: :get, url: shops_path do |form| %>
+    <%= form_with local: true, method: :get, url: shops_path do |form| %>
+      <%= form.text_field :term, class:"form-control w-100", placeholder: "Search for food, type, ingredients" %>
+      
       <span class="form-group mx-2">
         <%= form.select(:filter, Shop::FILTERS, {}, { :class => 'custom-select' }) %>
       </span>
