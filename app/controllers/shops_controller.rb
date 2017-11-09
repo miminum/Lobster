@@ -47,7 +47,7 @@ class ShopsController < ApplicationController
   def update
     respond_to do |format|
       if @shop.update(shop_params)
-        format.html { redirect_to @shop, notice: 'Congratulations, you are now a certified chef!' }
+        format.html { redirect_to @shop, notice: 'Shop Edited Succesfully' }
         format.json { render :show, status: :ok, location: shop_path }
       else
         format.html { render :edit }

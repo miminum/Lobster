@@ -27,8 +27,12 @@
       <p class="txt-grey w-50"><%= @shop.shop_description %></p>
     </div>
     <div class="col-4 col-lg-2">
+    
       <%= link_to conversations_path(sender_id: current_user.id, recipient_id: @shop.user_id), class: "btn btn-secondary mt-2", method: 'post' do %>
         <%= fa_icon "envelope", text: "Message me!" %>
+      <% end %>
+      <%= link_to shop_reviews_path(@shop), class: "btn btn-secondary mt-1" do %>
+        <%= fa_icon "bathtub", text: "See Reviews!" %>
       <% end %>
       <br><br>
       <span class="txt-white pt-2">

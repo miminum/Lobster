@@ -160,7 +160,7 @@
       <tr>
         <th scope="row">Your Photo</th>
         <td>
-          <% if @shop.shop_photo_data %>
+          <% if @shop.user_photo_data %>
             <%= image_tag @shop.user_photo_url(:thumb) %>
           <% else %>
             <p>No Image</p>

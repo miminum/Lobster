@@ -18,34 +18,34 @@
   </h5>
   <p id="notice"><small><%= notice %></small></p>
 </div>
-<table class="table">
+<table class="table mt-2">
   <tbody>
     <% @reviews.each do |review| %>
       <tr>
-        <td class="col-2">
+        <td class="">
           <span class="txt-blue">
             <% review.score.times do %>
               <%= fa_icon "star" %>
             <% end %>
           </span>
         </td>
-        <td class="col-6">
+        <td colspan="3">
           <%= review.content %>
         </td>
         <td>
           <%= "Review by: #{review.user.profile.first_name}" %>
         </td>
         <td>
-          <%= " #{review.created_at.Date}" %>
+          <%= " #{review.created_at.strftime("%d %b. %Y")}" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<div class="container">
+<div class="container text-center">
   <% if current_user == @shop.owner %>
-    <%= link_to 'Back', seller_profile_path %>
+    <%= link_to 'Back', seller_profile_path, class: "btn btn-primary" %>
   <% else %>
-    <%= link_to 'Back', @shop %>
+    <%= link_to 'Back', @shop, class: "btn btn-primary" %>
   <% end %>
 <div>

@@ -15,28 +15,49 @@
   <body>
     <div class="container px-0 pb-0">
       <nav class="container-fluid bg-grey pb-0 navbar-shadow">
-        <a class="navbar-brand navbar-title" href="/shops">Lobster</a>
+        <a class="navbar-brand navbar-title" href="/shops"><%= image_tag 'favicon-32x32.png', class: "pb-1" %> Lobster</a>
         <% if user_signed_in? %>
           <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-secondary float-right mr-1 mt-2', method: :delete %>
-          <%= link_to dashboard_path, class: "btn float-right ml-1 mr-3 txt-black mt-2" do %>
-            <%= fa_icon "user 2x" %>
-          <% end %>
-          <%= link_to conversations_path, class: "btn float-right mx-1 txt-black mt-2" do %>
-            <%= fa_icon "envelope 2x" %>
-          <% end %>
-          <% if current_user.shop %>
-            <%= link_to seller_profile_path, class: "btn float-right mx-1 txt-black mt-2" do %>
-              <%= fa_icon "shopping-cart 2x" %>
-            <% end %>
-          <% end %>
+          <div class="dropdown float-right mt-2 mr-2">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= fa_icon "cutlery", text: "Utensils" %>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <h5 class="mx-2">
+                <%= link_to dashboard_path, class: "txt-black navlink" do %>
+                  <%= fa_icon "user", text: "Dashboard" %>
+                <% end %>
+              </h5>
+              <h5 class="mx-2">
+                <%= link_to conversations_path, class: "txt-black navlink" do %>
+                  <%= fa_icon "envelope", text: "Inbox" %>
+                <% end %>
+              </h5>
+              <% if current_user.shop %>
+                <h5 class="mx-2">
+                  <%= link_to seller_profile_path, class: "txt-black navlink" do %>
+                    <%= fa_icon "shopping-cart", text: "Shop Dashboard" %>
+                  <% end %>
+                </h5>
+              <% end %>
+            </div>
+          </div>
         <% else %>
-          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-secondary float-right mx-1 mt-2' %>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary float-right mx-1 mt-2' %>
+          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-secondary float-right mx-1 mt-3' %>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary float-right mx-1 mt-3' %>
         <% end %>
       </nav>
+      <% if notice && alert %>
+        <div class="text-center container-fluid bg-red text-white py-1"><%= notice %></div>
+        <div class="text-center container-fluid bg-blue text-white py-1"><%= alert %></div>
+      <% elsif notice %>
+        <div class="text-center container-fluid bg-red text-white py-1"><%= notice %></div>
+      <% elsif alert %>
+        <div class="text-center container-fluid bg-red text-white py-1"><%= alert %></div>
+      <% end %>
+
       <%= yield %>
-      <span class="notice"><%= notice %></span>
-      <span class="alert"><%= alert %></span>
+
     </div>
   </body>
 </html>

@@ -4,6 +4,7 @@
 @import "inbox";
 @import "seller_profiles";
 @import "shops";
+@import "conversations";
 
 $primary-blue: #1B998B; 
 $primary-red: #AC3931;
@@ -74,6 +75,14 @@ body {
     border-color: $black;
   }
 
+  .btn-primary:active, .btn-primary.active,
+  .show > .btn-primary.dropdown-toggle {
+    color: $white;
+    background-color: $primary-blue;
+    background-image: none;
+    border-color: $primary-blue;
+  }
+
 .btn-secondary {
     color: $primary-blue;
     background-color: $primary-grey;
@@ -98,7 +107,10 @@ body {
     border-color: $primary-grey;
   }
   
-  
+  .navlink:hover {
+    text-decoration: none;
+    color: $primary-blue;
+  }
   
   
   

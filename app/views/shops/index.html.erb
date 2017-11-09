@@ -28,11 +28,15 @@
 </div>
 
 <div class="row mt-5 m-0 p-0">
-  <% @shops.each_with_index do |shop, index| %>
-    <div class="col-12 col-lg-4">
+  <% @shops.each do |shop| %>
+    <div class="col-12 col-lg-4 mb-2">
       <div class="shop-lists">
         <%= link_to shop_path(shop) do %>
-          <%= image_tag shop.shop_photo_url(:large), class: "h-100" %>
+          <% if shop.shop_photo_data %>
+            <%= image_tag shop.shop_photo_url(:large), class: "h-100" %>
+          <% else %>
+              <%= fa_icon "cutlery 5x", class: "txt-black navlink h-100" %>
+          <% end %>
         <% end %>
       </div>
       <h6 class="text-black"><%= shop.shop_name %> 
@@ -49,13 +53,20 @@
             Pickup only
           <% end %>
         </span><br>
-        <em class="float-right txt-grey"><%= "#{shop.suburb}, #{distance_from}km " %></em>
-        <em class="txt-grey"><%= shop.cuisine_type %></em>
+        <em class="float-right text-muted"><%= "#{shop.suburb}, #{distance_from}km " %></em>
+        <em class="text-muted">
+          <% score = shop.average_score %>
+          <% score_whole = score.to_i.floor %>
+          <% remainder = score.to_f - score_whole.to_f  %>
+          <% score_whole.times do %>
+            <%= fa_icon "star" %>
+          <% end %>
+          <% if remainder > 0.25 %>
+            <%= fa_icon "star-half" %>
+          <% end %>
+        
+        </em>
       </h6>
     </div>
-    <% if index > 0 && index % 3 == 0 %>
-      </div>
-      <div class="row">
-    <% end %>
   <% end %>
 </div>

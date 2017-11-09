@@ -6,6 +6,7 @@ class Profile < ApplicationRecord
   geocoded_by :full_street_address   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+  validates_uniqueness_of :user_id
   STATES = ["VIC", "NSW", "SA", "WA", "ACT", "QLD", "NT", "TAS"]
 
   def full_street_address

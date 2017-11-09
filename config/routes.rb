@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   
   # Routes for shop
   resources :shops do
-    resources :reviews, only: [:index]
+    get '/reviews', to: 'reviews#index', as: 'reviews'
   end
   # Routes for items
   resources :items, only: [:new, :create, :update, :edit, :destroy] 
