@@ -1,5 +1,8 @@
-<h1>My Shop</h1>
-
+<div class="bg-red txt-white text-center py-3">
+  <h1 class="heading-font">Your Details</h1>
+</div>
 <%= render 'form', profile: @profile %>
 
-<%= link_to 'Back', profile_path %>
+<div class="container-fluid text-center mt-4">
+  <%= link_to 'Back', home_path, class: "btn btn-secondary" %>
+</div>

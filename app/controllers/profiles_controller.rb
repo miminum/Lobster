@@ -20,7 +20,7 @@ class ProfilesController < ApplicationController
     @profile.user = current_user
 
     if @profile.save
-      redirect_to seller_profile_path
+      redirect_to shops_path, notice: 'Welcome to Lobster!' 
     else
       render :new
     end

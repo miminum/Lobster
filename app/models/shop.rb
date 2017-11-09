@@ -7,7 +7,9 @@ class Shop < ApplicationRecord
   validates :delivery_cost, numericality: { greater_than_or_equal_to: 0, less_than: 20 }
   
   CUISINE_TYPES = ["Continental", "Chinese", "French", "Italian", "Japanese", "Mexican", "Spanish", "Ethiopian", "Thai", "African", "Vietnamese"]
+  FILTERS = ["", "Distance", "Review Score", "Popularity"]
 
+  # Method to see only shops with active items
   def self.active_items
     shop_id = []
     Item.where(active: true).each do |item|
@@ -16,6 +18,7 @@ class Shop < ApplicationRecord
     self.where(id: shop_id)
   end
 
+  # Method to search term
   def self.search (term)
     items = Item.where('lower(name) Like ? OR lower(description) Like ?', "%#{term.downcase}%", "%#{term.downcase}%").where(active: true)
     shop_id = []
@@ -27,6 +30,7 @@ class Shop < ApplicationRecord
     (self.where(id: shop_id) + self_search).uniq
   end
 
+  # Start address methods
   def street_address
     User.find(self.user_id).profile.street_address
   end
@@ -38,6 +42,7 @@ class Shop < ApplicationRecord
   def state
     User.find(self.user_id).profile.state
   end
+  # End address methods
 
   def owner
     User.find(self.user_id)
@@ -50,5 +55,21 @@ class Shop < ApplicationRecord
 
   def reviews
     Review.where(shop: self)
+  end
+
+  def longitude
+    User.find(user_id).profile.longitude
+  end
+  
+  def latitude
+    User.find(user_id).profile.latitude
+  end
+
+  def distance_from_user (user)
+    Geocoder::Calculations.distance_between([self.longitude,self.latitude], [user.profile.longitude,user.profile.latitude], :units => :km).round(1)
+  end
+  
+  def popularity
+    Order.where(shop: self).count + Review.where(shop: self).count
   end
 end

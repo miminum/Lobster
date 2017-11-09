@@ -7,4 +7,7 @@ class User < ApplicationRecord
   has_one :shop
   has_many :items, through: :shop
   has_many :orders, through: :shop
+  has_many :conversations
+  has_many :messages
+  has_many :reviews
 end

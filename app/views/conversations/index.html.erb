@@ -12,33 +12,43 @@
       <th width="5%"></th>
     </tr>
   </thead>
-  <tbody class="">
-  <% @conversations.each do |conversation| %>
-    <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-      <% if conversation.sender_id == current_user.id %>
-        <% recipient = User.find(conversation.recipient_id) %>
-      <% else %>
-        <% recipient = User.find(conversation.sender_id) %>
-      <% end %>
-      <%= link_to conversation_messages_path(conversation) do %>
-        <tr class="inbox">
-          <td><%= recipient.profile.first_name %></td>
-          <td><%= recipient.email %></td>
-          <td><%= conversation.messages.last.body[0..80] %>&hellip;</td>
-          <td>
-            <%= show_date(conversation.messages.last.created_at) %>
-          </td>
-          <td>
-            <div class="btn btn-primary">
-              <%= link_to conversation_messages_path(conversation) do %>
-                <%= fa_icon "envelope", class: "txt-white" %>
-              <% end %>
-            </div>
-          </td>
-        </tr>
-      <% end %>
+  <% if current_user.conversations %>
+    <tbody class="">
+      <% @conversations.each do |conversation| %>
+        <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+          <% if conversation.sender_id == current_user.id %>
+            <% recipient = User.find(conversation.recipient_id) %>
+          <% else %>
+            <% recipient = User.find(conversation.sender_id) %>
+          <% end %>
+          <%= link_to conversation_messages_path(conversation) do %>
+            <tr class="inbox">
+              <td><%= recipient.profile.first_name %></td>
+              <td><%= recipient.email %></td>
+              <td>
+                <% if conversation.messages.last %>
+                  <%= conversation.messages.last.body[0..80] %>&hellip;
+                    </td>
+                    <td>
+                      <%= show_date(conversation.messages.last.created_at) %>
+                <% else %>
+                  </td>
+                  <td>
+                <% end %>
+              </td>
+              <td>
+                <div class="btn btn-primary">
+                  <%= link_to conversation_messages_path(conversation) do %>
+                    <%= fa_icon "envelope", class: "txt-white" %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
 
-    <% end %>
-  <% end %>
-</table>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 

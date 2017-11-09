@@ -2,6 +2,7 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    redirect_to shops_path if current_user.conversations.nil?
     @users = User.all
     @conversations = Conversation.all
   end
