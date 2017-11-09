@@ -4,9 +4,9 @@ class SellerProfilesController < ApplicationController
   
   def index
     @items = Item.where(shop: @shop)
-    @orders = Order.order(created_at: :desc)  .where(shop: @shop).where.not(charge_identifier: nil).reverse
+    @orders = Order.where(shop: @shop).where.not(charge_identifier: nil).where.not("mark_as_done = ? AND delivered = ?", true, true).order(created_at: :desc)
   end
-
+    
   def show
   end
 

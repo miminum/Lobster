@@ -39,7 +39,7 @@
 <div class="row">
   <div class="col-12 col-lg-12 mb-3">
     <div class="container bg-grey text-center">
-      <h4 class="heading-font txt-black py-4">My Orders</h4>
+      <h4 class="heading-font txt-black py-4">My Active Orders</h4>
     </div>
     <table class="table table-striped">
       <thead>
@@ -77,14 +77,14 @@
               <% if order.done? %>
                 <%= form_for order do |f| %>
                   <%= f.hidden_field :mark_as_done, value: false %>
-                  <%= f.button :submit, class: "btn btn-red" do %>
+                  <%= f.button :submit, class: "btn btn-primary" do %>
                     <%= fa_icon "square" %>
                   <% end %>
                 <% end %>
               <% else %>
                 <%= form_for order do |f| %>
                   <%= f.hidden_field :mark_as_done, value: true %>
-                  <%= f.button :submit, class: "btn btn-primary" do %>
+                  <%= f.button :submit, class: "btn btn-red" do %>
                     <%= fa_icon "check-square" %>
                   <% end %>
                 <% end %>
@@ -112,7 +112,7 @@
       </tbody>
     </table>
     <div class="container bg-grey text-center py-3">
-      <%= link_to "View All", orders_path, class: "btn btn-primary" %>
+      <%= link_to "View All", shop_orders_path(@shop), class: "btn btn-primary" %>
     </div>
   </div>
 

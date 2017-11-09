@@ -5,7 +5,9 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    redeirect to shops_path if current_user.shop.nil?
+    @shop = Shop.find(params[:shop_id])
+    @orders = Order.where(shop_id: @shop.id).where.not(charge_identifier: nil).reverse
   end
 
   # GET /orders/1

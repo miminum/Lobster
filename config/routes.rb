@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   post 'order_items/create', to:'order_items#create', as: 'order_items'
   # Orders
-  resources :orders do
+  resources :orders, only: [:create, :show, :new, :update] do
     get '/payment', to: 'charges#new', as: 'new_charge'
     resources :charges, only: [:create]
     resources :reviews, only: [:new, :create]
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   # Routes for shop
   resources :shops do
     get '/reviews', to: 'reviews#index', as: 'reviews'
+    get '/orders', to: 'orders#index', as: 'orders'
   end
   # Routes for items
   resources :items, only: [:new, :create, :update, :edit, :destroy] 
