@@ -13,39 +13,40 @@
   </head>
 
   <body>
-    <div class="container px-0 pb-0">
-      <nav class="container-fluid bg-grey pb-0 navbar-shadow">
-        <a class="navbar-brand navbar-title" href="/shops"><%= image_tag 'favicon-32x32.png', class: "pb-1" %> Lobster</a>
-        <% if user_signed_in? %>
-          <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-secondary float-right mr-1 mt-2', method: :delete %>
-          <div class="dropdown float-right mt-2 mr-2">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= fa_icon "cutlery", text: "Utensils" %>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <h5 class="mx-2">
-                <%= link_to dashboard_path, class: "txt-black navlink" do %>
-                  <%= fa_icon "user", text: "Dashboard" %>
-                <% end %>
-              </h5>
-              <h5 class="mx-2">
-                <%= link_to conversations_path, class: "txt-black navlink" do %>
-                  <%= fa_icon "envelope", text: "Inbox" %>
-                <% end %>
-              </h5>
-              <% if current_user.shop %>
+      <nav class="container-fluid bg-grey pb-0 navbar-shadow row mx-0">
+        <div class="col-lg-10 offset-lg-1">
+          <a class="navbar-brand navbar-title" href="/shops"><%= image_tag 'favicon-32x32.png', class: "pb-1" %> Lobster</a>
+          <% if user_signed_in? %>
+            <%= link_to 'Sign out', destroy_user_session_path, class: 'btn btn-secondary float-right mr-1 mt-2', method: :delete %>
+            <div class="dropdown float-right mt-2 mr-2">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= fa_icon "cutlery", text: "Utensils" %>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <h5 class="mx-2">
-                  <%= link_to seller_profile_path, class: "txt-black navlink" do %>
-                    <%= fa_icon "shopping-cart", text: "Shop Dashboard" %>
+                  <%= link_to dashboard_path, class: "txt-black navlink" do %>
+                    <%= fa_icon "user", text: "Dashboard" %>
                   <% end %>
                 </h5>
-              <% end %>
+                <h5 class="mx-2">
+                  <%= link_to conversations_path, class: "txt-black navlink" do %>
+                    <%= fa_icon "envelope", text: "Inbox" %>
+                  <% end %>
+                </h5>
+                <% if current_user.shop %>
+                  <h5 class="mx-2">
+                    <%= link_to seller_profile_path, class: "txt-black navlink" do %>
+                      <%= fa_icon "shopping-cart", text: "Shop Dashboard" %>
+                    <% end %>
+                  </h5>
+                <% end %>
+              </div>
             </div>
-          </div>
-        <% else %>
-          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-secondary float-right mx-1 mt-3' %>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary float-right mx-1 mt-3' %>
-        <% end %>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-secondary float-right mx-1 mt-3' %>
+            <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary float-right mx-1 mt-3' %>
+          <% end %>
+        </div>
       </nav>
       <% if notice && alert %>
         <div class="text-center container-fluid bg-red text-white py-1"><%= notice %></div>
@@ -55,15 +56,18 @@
       <% elsif alert %>
         <div class="text-center container-fluid bg-red text-white py-1"><%= alert %></div>
       <% end %>
-
-      <%= yield %>
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <%= yield %>
+        </div>
+      </div>
 
       <div class="text-center container-fluid bg-grey mt-5 py-5">
-        <%= fa_icon "facebook 2x", class:"px-3" %>
-        <%= fa_icon "instagram 2x", class:"px-3" %>
-        <%= fa_icon "twitter 2x", class:"px-3" %>
-        <%= fa_icon "snapchat 2x", class:"px-3" %>
+        <%= link_to 'https://github.com/miminum/Lobster', title: 'Lobster github repo', class: 'footer-icon' do %>
+          <%= fa_icon "github 2x", class:"px-3" %>
+        <% end %>
+
       </div>
-    </div>
+
   </body>
 </html>

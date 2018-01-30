@@ -1,20 +1,23 @@
-<div class= "container-fluid py-5 my-5">
-  <h1 class= "heading-font">Home cooking has one unique ingredient..</h1>
+<div class="landing-photo">
+  <%= image_tag 'kitchen.jpg', class: "w-100" %>
 </div>
-
-<div class= "container-fluid py-5 my-5">
-  <h1 class="text-center heading-font">Love</h1>
-</div>
-
-<div class= "container-fluid py-5 my-5 text-center">
-  <h1 class="float-right heading-font">&</h1>
-</div>
-
-<div class= "container-fluid row pt-5 mt-5">
-  <div class="col-4 offset-8 col-lg-2 offset-lg-10 text-center">
-    <h3 class="float-right lobster">somtimes Lobster</h3>
-    <%= image_tag 'favicon-32x32.png', class: "" %>
-    <%= image_tag 'favicon-32x32.png', class: "" %>
-    <%= image_tag 'favicon-32x32.png', class: "" %>
+<div class="row m-0 p-0">
+  <div class="col-md-4 col-12 text-center py-3">
+    <div class="w-75 mx-auto my-3">
+      <%= fa_icon "cutlery 5x", class: "txt-blue" %>
+    </div>
+    <p class="w-75 mx-auto">A healthier alternative to eating out, Lobster is a platform where you can order home-cooked meals from local kitchens in your area.</p>
+  </div>
+  <div class="col-md-4 col-12 text-center py-3">
+    <div class="w-75 mx-auto my-3">
+      <%= fa_icon "credit-card-alt 5x", class: "txt-grey" %>
+    </div>
+    <p class="w-75 mx-auto">You can choose to set up your own shop and cook for an additional income. Like Uber, you choose when you work and how much hours you put in. </p>
+  </div>
+  <div class="col-md-4 col-12 text-center py-3">
+    <div class="w-75 mx-auto my-3">
+      <%= fa_icon "car 5x", class: "txt-red" %>
+    </div>
+    <p class="w-75 mx-auto">Have your meals delivered to your door or if youre feeling Lazy, selected cooks have a delivery option if you're close enough.</p>
   </div>
 </div>

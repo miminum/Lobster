@@ -13,7 +13,7 @@ class Profile < ApplicationRecord
     "#{street_address}, #{suburb}, #{state}, AU"
   end
 
-  def distance_between (user)
+  def distance_between (user) 
     Geocoder::Calculations.distance_between([self.longitude,self.latitude], [user.profile.longitude,user.profile.latitude], :units => :km).round(1)
   end
 
